@@ -16,3 +16,5 @@ def start_application():
 
 
 app = start_application()
+
+# crazy people who thinks of changing the world actually change the world.
