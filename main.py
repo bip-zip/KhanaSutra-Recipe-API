@@ -1,15 +1,18 @@
 from fastapi import FastAPI
-from fastapi import Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+from core.config import settings
+from apis.base import api_router
 
-templates = Jinja2Templates(directory="templates")
-app = FastAPI()
-
-
-@app.get("/")
-def home(request: Request):
-	return templates.TemplateResponse("index.html",{"request":request})
+# including router
+def include_router(app):
+	app.include_router(api_router)
 
 
+def start_application():
+	app = FastAPI(title=settings.PROJECT_NAME,version=settings.PROJECT_VERSION)
+	include_router(app)
+	return app 
 
+
+
+
+app = start_application()
